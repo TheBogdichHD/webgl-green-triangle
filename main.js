@@ -78,6 +78,7 @@ function main() {
     0.0, 1.0,
     1.0, -1.0,
   ];
+  
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangle), gl.STATIC_DRAW);
 
   gl.useProgram(program);
@@ -91,6 +92,16 @@ function main() {
 
   gl.drawArrays(gl.TRIANGLES, 0, 3);
 
+  gl.disableVertexAttribArray(vertexAttributeLocation)
+  
+  if (gl.getError() != gl.NO_ERROR)
+    alert("Error!");
+
+  gl.useProgram(null);
+  gl.deleteProgram(program);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  gl.deleteBuffer(VBO);
 }
 
 main();
